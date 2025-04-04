@@ -65,13 +65,4 @@ ng serve
 
 The frontend will be available at: `http://localhost:4200`
 
-## Environment Variables
-
-Backend requires these JWT variables in `.env`:
-```dotenv
-JWT_SECRET_KEY=%kernel.project_dir%/config/jwt/private.pem
-JWT_PUBLIC_KEY=%kernel.project_dir%/config/jwt/public.pem
-JWT_PASSPHRASE=your_passphrase_here
-```
-
 
