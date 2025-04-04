@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'players',
-    loadChildren: () => import('./player/player.module').then(m => m.PlayerModule)
+    loadChildren: () => import('./modules/player/player.module').then(m => m.PlayerModule)
   }
 ];
 
