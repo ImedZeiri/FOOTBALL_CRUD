@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { DataTableComponent } from './data-table/data-table.component';
 import { LoaderComponent } from './loader/loader.component';
 import { EmptyDataComponent } from './empty-data/empty-data.component';
+import { FormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,13 @@ import { EmptyDataComponent } from './empty-data/empty-data.component';
     EmptyDataComponent
   ],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule,
+  ],
+  exports: [
+    DataTableComponent,
+    LoaderComponent,
+    EmptyDataComponent
+  ],
 })
 export class SharedModule { }

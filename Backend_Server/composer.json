@@ -12,6 +12,7 @@
         "doctrine/doctrine-bundle": "^2.13",
         "doctrine/doctrine-migrations-bundle": "^3.4",
         "doctrine/orm": "^2.20",
+        "lexik/jwt-authentication-bundle": "^2.21",
         "nelmio/cors-bundle": "^2.5",
         "stof/doctrine-extensions-bundle": "^1.13",
         "symfony/asset": "5.4.*",
@@ -21,6 +22,7 @@
         "symfony/framework-bundle": "5.4.*",
         "symfony/maker-bundle": "^1.43",
         "symfony/runtime": "5.4.*",
+        "symfony/security-bundle": "5.4.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
         "symfony/yaml": "5.4.*"

@@ -1,0 +1,79 @@
+<div class="auth-container">
+    <div class="auth-card">
+      <header class="auth-header">
+        <h1 class="auth-title">Créer un compte</h1>
+      </header>
+  
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form" novalidate>
+        <div class="form-field">
+          <label for="email" class="form-label">Email</label>
+          <input 
+            id="email" 
+            type="email" 
+            formControlName="username" 
+            placeholder="votre@email.com"
+            class="form-input"
+            [ngClass]="{'form-input--error': f['username'].touched && f['username'].errors}"
+            required>
+          <div *ngIf="f['username'].touched && f['username'].errors" class="form-error">
+            <span *ngIf="f['username'].errors?.['required']">L'email est requis</span>
+            <span *ngIf="f['username'].errors?.['email']">Veuillez entrer un email valide</span>
+          </div>
+        </div>
+  
+        <div class="form-field">
+          <label for="password" class="form-label">Mot de passe</label>
+          <input 
+            id="password" 
+            type="password" 
+            formControlName="password" 
+            placeholder="••••••••"
+            class="form-input"
+            [ngClass]="{'form-input--error': f['password'].touched && f['password'].errors}">
+          <div *ngIf="f['password'].touched && f['password'].errors" class="form-error">
+            <span *ngIf="f['password'].errors?.['required']">Mot de passe requis</span>
+            <span *ngIf="f['password'].errors?.['minlength']">8 caractères minimum</span>
+            <span *ngIf="f['password'].errors?.['pattern']">
+              Doit contenir majuscule, minuscule, chiffre et caractère spécial
+            </span>
+          </div>
+        </div>
+  
+        <div class="form-field">
+          <label for="confirmPassword" class="form-label">Confirmer le mot de passe</label>
+          <input 
+            id="confirmPassword" 
+            type="password" 
+            formControlName="confirmPassword" 
+            placeholder="••••••••"
+            class="form-input"
+            [ngClass]="{'form-input--error': (f['confirmPassword'].touched && f['confirmPassword'].errors) || errorMessage === 'Les mots de passe ne correspondent pas'}">
+          <div *ngIf="errorMessage === 'Les mots de passe ne correspondent pas'" class="form-error">
+            {{ errorMessage }}
+          </div>
+        </div>
+  
+        <div *ngIf="errorMessage" class="form-server-error" role="alert">
+          {{ errorMessage }}
+        </div>
+  
+        <div *ngIf="successMessage" class="form-server-success" role="alert">
+          {{ successMessage }}
+        </div>
+  
+        <button 
+          type="submit" 
+          class="auth-button"
+          [disabled]="registerForm.invalid || isLoading"
+          [attr.aria-busy]="isLoading">
+          <span *ngIf="!isLoading">S'inscrire</span>
+          <span *ngIf="isLoading" class="loading-text">Inscription en cours...</span>
+        </button>
+      </form>
+  
+      <footer class="auth-footer">
+        <span>Déjà un compte ?</span>
+        <a routerLink="/auth/login" class="auth-link">Se connecter</a>
+      </footer>
+    </div>
+  </div>

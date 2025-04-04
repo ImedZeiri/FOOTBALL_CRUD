@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { API_CONFIG } from '../../core/const';
+import { API_CONFIG } from 'src/app/core/const';
 
 @Injectable({
   providedIn: 'root'
@@ -29,5 +29,12 @@ export class PlayerService {
 
   deletePlayer(id: number): Observable<any> {
     return this.http.delete(`${this.apiUrl}/${id}`);
+  }
+
+  importPlayers(players: any[]): Observable<any> {
+    const invalidPlayers = players.filter(p => !p.firstName || !p.lastName);
+    if (invalidPlayers.length > 0) {
+    }
+    return this.http.post(`${this.apiUrl}/import`, players);
   }
 }

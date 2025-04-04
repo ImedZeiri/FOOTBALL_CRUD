@@ -1,0 +1,61 @@
+<!-- edit.component.html -->
+<div class="container mt-4">
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading" class="card">
+      <div class="card-header bg-primary text-white">
+        <h2>Modifier le joueur</h2>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="firstName" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="firstName" formControlName="firstName">
+              </div>
+              <div class="mb-3">
+                <label for="lastName" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="lastName" formControlName="lastName">
+              </div>
+              <div class="mb-3">
+                <label for="position" class="form-label">Position</label>
+                <select class="form-select" id="position" formControlName="position">
+                  <option value="Attaquant">Attaquant</option>
+                  <option value="Milieu">Milieu</option>
+                  <option value="Défenseur">Défenseur</option>
+                  <option value="Gardien">Gardien</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="mb-3">
+                <label for="team" class="form-label">Équipe</label>
+                <input type="text" class="form-control" id="team" formControlName="team">
+              </div>
+              <div class="mb-3">
+                <label for="age" class="form-label">Âge</label>
+                <input type="number" class="form-control" id="age" formControlName="age">
+              </div>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-outline-secondary" routerLink="/players">
+              <i class="bi bi-arrow-left"></i> Annuler
+            </button>
+            <button type="submit" class="btn btn-primary" [disabled]="editForm.invalid || isUpdating">
+              <span *ngIf="!isUpdating">Enregistrer</span>
+              <span *ngIf="isUpdating">
+                <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                Enregistrement...
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
