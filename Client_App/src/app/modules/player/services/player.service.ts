@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { API_CONFIG } from 'src/app/core/const';
 
 @Injectable({
@@ -31,10 +32,17 @@ export class PlayerService {
     return this.http.delete(`${this.apiUrl}/${id}`);
   }
 
-  importPlayers(players: any[]): Observable<any> {
-    const invalidPlayers = players.filter(p => !p.firstName || !p.lastName);
-    if (invalidPlayers.length > 0) {
+  importPlayers(players: any[]): Observable<any[]> {
+    const validPlayers = players.filter(p => p.firstName && p.lastName);
+    
+    if (validPlayers.length === 0) {
+      return of([]);
     }
-    return this.http.post(`${this.apiUrl}/import`, players);
+    const creationRequests = validPlayers.map(player => 
+      this.http.post(this.apiUrl, player).pipe(
+        catchError(error => of({ error, player }))
+      )
+    );
+    return forkJoin(creationRequests);
   }
 }
