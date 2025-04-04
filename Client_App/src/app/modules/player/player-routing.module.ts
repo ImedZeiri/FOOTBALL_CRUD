@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DetailComponent } from './components/detail/detail.component';
-import { AddComponent } from './components/add/add.component';
-import { EditComponent } from './components/edit/edit.component';
 import { ListComponent } from './components/list/list.component';
+import { AddComponent } from './components/add/add.component';
+import { DetailComponent } from './components/detail/detail.component';
+import { EditComponent } from './components/edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: ListComponent },

@@ -1,1 +1,8 @@
-{{players}}
+<button routerLink="/players/add" class="btn btn-primary mb-3">➕ Ajouter un joueur</button>
+
+<app-data-table 
+  [players]="players"
+  (view)="onView($event)"
+  (edit)="onEdit($event)"
+  (delete)="onDelete($event)">
+</app-data-table>

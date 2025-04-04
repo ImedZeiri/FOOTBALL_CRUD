@@ -1,1 +1,37 @@
-<p>detail works!</p>
+<!-- detail.component.html -->
+<div class="container mt-4">
+    <div *ngIf="isLoading" class="text-center">
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading && player" class="card">
+      <div class="card-header bg-primary text-white">
+        <h2>Détails du joueur</h2>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <p><strong>ID:</strong> {{ player.id }}</p>
+            <p><strong>Prénom:</strong> {{ player.firstName }}</p>
+            <p><strong>Nom:</strong> {{ player.lastName }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Position:</strong> {{ player.position }}</p>
+            <p><strong>Équipe:</strong> {{ player.team }}</p>
+            <p><strong>Âge:</strong> {{ player.age }}</p>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-outline-primary" routerLink="/players">
+          <i class="bi bi-arrow-left"></i> Retour à la liste
+        </button>
+      </div>
+    </div>
+  
+    <div *ngIf="!isLoading && !player" class="alert alert-warning">
+      Joueur non trouvé
+    </div>
+  </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlayerService } from '../../services/player.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-list',
@@ -9,7 +10,10 @@ import { PlayerService } from '../../services/player.service';
 export class ListComponent implements OnInit {
   players: any[] = [];
 
-  constructor(private playerService: PlayerService) { }
+  constructor(
+    private playerService: PlayerService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.loadPlayers();
@@ -26,16 +30,22 @@ export class ListComponent implements OnInit {
     );
   }
 
-  deletePlayer(id: number): void {
-    if (confirm('Are you sure you want to delete this player?')) {
-      this.playerService.deletePlayer(id).subscribe(
-        () => {
-          this.loadPlayers();
-        },
-        (error) => {
-          console.error('Error deleting player', error);
-        }
-      );
-    }
+  onView(id: number): void {
+    this.router.navigate(['/players', id]);
+  }
+
+  onEdit(id: number): void {
+    this.router.navigate(['/players', id, 'edit']);
+  }
+
+  onDelete(id: number): void {
+    this.playerService.deletePlayer(id).subscribe(
+      () => {
+        this.loadPlayers(); // Recharger la liste après suppression
+      },
+      (error) => {
+        console.error('Error deleting player', error);
+      }
+    );
   }
 }
