@@ -1,12 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ElementRef, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-data-table',
   templateUrl: './data-table.component.html',
   styleUrls: ['./data-table.component.scss']
 })
-export class DataTableComponent implements OnInit {
+export class DataTableComponent implements OnInit, OnChanges {
   @Input() players: any[] = [];
   @Output() view = new EventEmitter<number>();
   @Output() edit = new EventEmitter<number>();
@@ -27,6 +26,12 @@ export class DataTableComponent implements OnInit {
   
   ngOnInit(): void {
     this.filterPlayers();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['players']) {
+      this.filterPlayers();
+    }
   }
 
   filterPlayers(): void {
@@ -114,4 +119,27 @@ export class DataTableComponent implements OnInit {
   getDisplayedResults(): number {
     return Math.min(this.currentPage * this.itemsPerPage, this.totalItems);
   }
+
+  get visiblePages(): number[] {
+    const pages: number[] = [];
+    const maxVisiblePages = 3; 
+  
+    let start = Math.max(2, this.currentPage - Math.floor(maxVisiblePages / 2));
+    let end = Math.min(this.totalPages - 1, this.currentPage + Math.floor(maxVisiblePages / 2));
+  
+    if (this.currentPage <= 3) {
+      start = 2;
+      end = Math.min(2 + maxVisiblePages - 1, this.totalPages - 1);
+    }
+  
+    if (this.currentPage >= this.totalPages - 2) {
+      start = Math.max(this.totalPages - maxVisiblePages, 2);
+      end = this.totalPages - 1;
+    }
+  
+    for (let i = start; i <= end; i++) {
+      pages.push(i);
+    }
+    return pages;
+  }  
 }

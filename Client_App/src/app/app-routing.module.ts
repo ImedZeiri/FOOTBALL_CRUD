@@ -10,7 +10,7 @@ const routes: Routes = [
   { 
     path: 'players', 
     loadChildren: () => import('./modules/player/player.module').then(m => m.PlayerModule),
-    //canActivate: [AuthGuard]
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo: '/players', pathMatch: 'full' },
   { path: '**', redirectTo: '/players' }

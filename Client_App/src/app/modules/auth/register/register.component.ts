@@ -62,20 +62,7 @@ export class RegisterComponent implements OnInit {
 
     const { confirmPassword, ...userData } = this.registerForm.value;
 
-    this.authService.register(userData).subscribe({
-      next: (response) => {
-        this.isLoading = false;
-        this.successMessage = 'Inscription réussie ! Redirection en cours...';
-        setTimeout(() => {
-          this.router.navigate(['/auth/login']);
-        }, 2000);
-      },
-      error: (err) => {
-        this.isLoading = false;
-        this.errorMessage = err.error?.message || 'Une erreur est survenue lors de l\'inscription';
-        console.error('Registration error:', err);
-      }
-    });
+    this.router.navigate(['/auth/login']);
   }
 
   private markFormGroupTouched(formGroup: FormGroup): void {

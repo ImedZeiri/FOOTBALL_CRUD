@@ -2,11 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
-import { API_CONFIG } from '../const'; // Make sure this path is correct
+import { API_CONFIG } from '../const';
 
 interface User {
-  id: number;
-  username: string; // Changed from email to username to match your API
+  username: string;
+  token:string
 }
 
 interface LoginResponse {

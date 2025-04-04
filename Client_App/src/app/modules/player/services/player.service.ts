@@ -81,7 +81,6 @@ export class PlayerService {
   }
 
   createPlayer(player: any): Observable<any> {
-    // Génère un nouvel ID
     const newId = Math.max(...this.playersData.map(p => p.id)) + 1;
     const newPlayer = {
       ...player,
@@ -114,9 +113,42 @@ export class PlayerService {
     return of({success: initialLength !== this.playersData.length});
   }
 
-  // Méthode utilitaire pour simuler un délai réseau
   private simulateNetworkDelay<T>(data: T): Observable<T> {
-    return of(data); // Retirer le setTimeout en production
-    // return of(data).pipe(delay(200)); // Pour simuler un délai réseau
+    return of(data);
+  }
+
+  importPlayers(players: any[]): Observable<any> {
+    try {
+      let maxId = this.playersData.length > 0 
+        ? Math.max(...this.playersData.map(p => p.id)) 
+        : 0;
+      
+      const newPlayers = players.map(player => {
+        if (!player.firstName || !player.lastName) {
+          throw new Error('Les joueurs doivent avoir un prénom et un nom');
+        }
+        
+        maxId += 1;
+        return {
+          ...player,
+          id: maxId,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+      });
+      
+      this.playersData.push(...newPlayers);
+      
+      return of({
+        success: true,
+        count: newPlayers.length,
+        message: `${newPlayers.length} joueurs importés avec succès`
+      });
+    } catch (error: any) {
+      return of({
+        success: false,
+        message: error.message || 'Erreur lors de l\'importation des joueurs'
+      });
+    }
   }
 }

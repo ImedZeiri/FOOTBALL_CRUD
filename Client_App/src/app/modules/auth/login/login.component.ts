@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     private router: Router
   ) {
     this.loginForm = this.fb.group({
-      username: ['', [Validators.required]], // Modifié: email -> username
+      username: ['', [Validators.required]],
       password: ['', [Validators.required]]
     });
   }
@@ -40,9 +40,9 @@ export class LoginComponent implements OnInit {
     this.isLoading = true;
     this.errorMessage = null;
 
-    const { username, password } = this.loginForm.value; // Modifié: email -> username
+    const { username, password } = this.loginForm.value;
 
-    this.authService.login(username, password).subscribe({ // Modifié: email -> username
+    this.authService.login(username, password).subscribe({
       next: () => {
         this.isLoading = false;
         this.router.navigate(['/players']);
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  get username() { // Modifié: email -> username
+  get username() {
     return this.loginForm.get('username');
   }
 

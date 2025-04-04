@@ -1,4 +1,3 @@
-/* Style personnalisé pour compléter Bootstrap */
 .nav-tabs .nav-link {
     cursor: pointer;
     color: #495057;
@@ -28,18 +27,15 @@
     }
   }
   
-  /* Animation pour les transitions */
   .table-responsive {
     transition: all 0.3s ease;
   }
   
-  /* Style pour le message vide */
   .text-muted {
     font-style: italic;
     padding: 1rem 0;
   }
 
-  /* Styles pour la modale */
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -105,7 +101,6 @@
   }
 }
 
-/* Animation */
 @keyframes modalFadeIn {
   from {
       opacity: 0;
@@ -117,7 +112,6 @@
   }
 }
 
-/* Boutons */
 .btn {
   padding: 8px 16px;
   border-radius: 4px;
